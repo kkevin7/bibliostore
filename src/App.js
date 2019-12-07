@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import './css/bootstrap.min.css';
 
 import store from './store';
 import { Provider } from 'react-redux';
