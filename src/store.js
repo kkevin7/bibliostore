@@ -2,6 +2,7 @@ import {createStore, combineReducers, compose} from 'redux';
 import {reactReduxFirebase, firebaseReducer} from 'react-redux-firebase';
 import {reduxFirestore, firestoreReducer} from 'redux-firestore';
 import firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 
 //Configurar firestore
@@ -12,7 +13,7 @@ var firebaseConfig = {
     projectId: "bibliostore-99d77",
     storageBucket: "bibliostore-99d77.appspot.com",
     messagingSenderId: "291758006000",
-    appId: "1:291758006000:web:40c9f47cf4d37bcee46c35"
+    appId: "1:291758006000:web:a8d580a6d1798b4fe46c35"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
