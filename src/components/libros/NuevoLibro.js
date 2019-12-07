@@ -1,12 +1,119 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { firestoreConnect } from "react-redux-firebase";
+import PropTypes from "prop-types";
 
 class NuevoLibro extends Component {
-    state = {  }
-    render() {
-        return (
-            <h1>Nuevo Libro</h1>
-        );
-    }
+  state = {
+    titulo: "",
+    ISBN: "",
+    editorial: "",
+    existencia: ""
+  };
+
+  //almacena lo que el usuario escribe en el state
+  leerDato = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  //guardar libro en la base de datos
+  agregarLibro = e => {
+    e.preventDefault();
+    //tomar una copia del state
+    const nuevoLibro = this.state;
+    //agrgear un arreglo de interesados
+    nuevoLibro.prestados = [];
+    //extraer firestore con sus métodos
+    const { firestore, history } = this.props;
+    //añadir a la base de datos y redireccionar
+    firestore
+      .add({ collection: "libros" }, nuevoLibro)
+      .then(() => history.push("/"));
+  };
+
+  render() {
+    return (
+      <div className="row">
+        <div className="col-12 mb-4">
+          <Link to={"/"} className="btn btn-secondary">
+            <i className="fas fa-arrow-circle-left"></i> {""}
+            Volver al listado
+          </Link>
+        </div>
+        <div className="col-12">
+          <h2>
+            <i className="fas fa-book"></i> {""}
+            Nuevo Libro
+          </h2>
+          <div className="row justify-content-center">
+            <div className="col-md-8 mt-5">
+              <form onSubmit={this.agregarLibro}>
+                <div className="form-group">
+                  <label htmlFor="titulo">Titulo:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="titulo"
+                    placeholder="Titulo o Nombre del Libro"
+                    required
+                    value={this.state.titulo}
+                    onChange={this.leerDato}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="ISBN">ISBN:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="ISBN"
+                    placeholder="ISBN del Libro"
+                    required
+                    value={this.state.ISBN}
+                    onChange={this.leerDato}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="editorial">Editorial:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="editorial"
+                    placeholder="Editorial del Libro"
+                    required
+                    value={this.state.editorial}
+                    onChange={this.leerDato}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="existencia">Existencia:</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="existencia"
+                    placeholder="Existencia del Libro"
+                    required
+                    value={this.state.existencia}
+                    onChange={this.leerDato}
+                  />
+                </div>
+                <input
+                  type="submit"
+                  value="Agregar Libro"
+                  className="btn btn-success mt-4"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default NuevoLibro;
+NuevoLibro.propTypes = {
+    firestore: PropTypes.object.isRequired
+}
+
+export default firestoreConnect()(NuevoLibro);
