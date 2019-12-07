@@ -11,7 +11,7 @@ import MostrarSuscriptor from './components/suscriptores/MostrarSuscriptor';
 import NuevoSuscriptor from './components/suscriptores/NuevoSuscriptor';
 import EditarSuscriptor from './components/suscriptores/EditarSuscriptor';
 import Libros from './components/libros/Libros';
-import MostrarLibro from './components/libros/MostrarLibros';
+import MostrarLibro from './components/libros/MostrarLibro';
 import NuevoLibro from './components/libros/NuevoLibro';
 import EditarLibro from './components/libros/EditarLibro';
 import PrestamoLibro from './components/libros/PrestamoLibro';
