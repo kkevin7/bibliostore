@@ -6,7 +6,17 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 
-const Libros = ({ libros }) => {
+const Libros = ({ libros, firestore }) => {
+
+  const eliminarLibro = id =>{
+    //eliminar libro de firestore
+    firestore.delete({
+      collection: 'libros',
+      doc: id
+    })
+  }
+
+
   if (!libros) return <Spinner />;
 
   return (
@@ -52,6 +62,7 @@ const Libros = ({ libros }) => {
                   <button
                     type="button"
                     className="btn btn-danger btn-block"
+                    onClick={() => eliminarLibro(libro.id)}
                   >
                       <i className="fas fa-trash-alt"></i> {''}
                       Eliminar

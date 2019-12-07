@@ -17,6 +17,9 @@ const Navbar = () => {
         <li className="nav-item">
           <Link to={'/Suscriptores'} className="nav-link" >Suscriptores</Link>
         </li>
+        <li className="nav-item">
+          <Link to={'/'} className="nav-link" >Libros</Link>
+        </li>
       </ul>
     </div>
   </nav> );
